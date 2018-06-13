@@ -1,0 +1,11 @@
+[Protocol]
+exec=nexol-qt '%u'
+protocol=nexol
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

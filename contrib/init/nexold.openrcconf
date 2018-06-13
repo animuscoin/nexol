@@ -1,0 +1,33 @@
+# /etc/conf.d/nexold: config file for /etc/init.d/nexold
+
+# Config file location
+#NEXOLD_CONFIGFILE="/etc/nexol/nexol.conf"
+
+# What directory to write pidfile to?  (created and owned by $NEXOLD_USER)
+#NEXOLD_PIDDIR="/var/run/nexold"
+
+# What filename to give the pidfile
+#NEXOLD_PIDFILE="${NEXOLD_PIDDIR}/nexold.pid"
+
+# Where to write nexold data (be mindful that the blockchain is large)
+#NEXOLD_DATADIR="/var/lib/nexold"
+
+# User and group to own nexold process
+#NEXOLD_USER="nexol"
+#NEXOLD_GROUP="nexol"
+
+# Path to nexold executable
+#NEXOLD_BIN="/usr/bin/nexold"
+
+# Nice value to run nexold under
+#NEXOLD_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#NEXOLD_OPTS=""
+
+# The timeout in seconds OpenRC will wait for nexold to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+NEXOLD_SIGTERM_TIMEOUT=60

@@ -1,0 +1,6 @@
+usr/local/bin/nexol-qt usr/bin
+share/pixmaps/nexol32.xpm usr/share/pixmaps
+share/pixmaps/nexol16.xpm usr/share/pixmaps
+share/pixmaps/nexol128.png usr/share/pixmaps
+debian/nexol-qt.desktop usr/share/applications
+debian/nexol-qt.protocol usr/share/kde4/services/

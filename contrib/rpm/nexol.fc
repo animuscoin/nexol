@@ -1,0 +1,8 @@
+/usr/bin/nexol-cli		--	gen_context(system_u:object_r:nexol_exec_t,s0)
+/usr/sbin/nexold		--	gen_context(system_u:object_r:nexol_exec_t,s0)
+/usr/lib(64)?/nexol/nexold		--	gen_context(system_u:object_r:nexol_exec_t,s0)
+
+/etc/nexol(/.*)?		gen_context(system_u:object_r:nexol_conf_t,s0)
+/var/lib/nexol(/.*)?		gen_context(system_u:object_r:nexol_var_lib_t,s0)
+
+(/var)?/run/nexold(/.*)?   gen_context(system_u:object_r:nexol_var_run_t,s0)

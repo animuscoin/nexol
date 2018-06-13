@@ -1,0 +1,81 @@
+policy_module(nexol, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type nexol_t;
+type nexol_exec_t;
+init_daemon_domain(nexol_t, nexol_exec_t)
+
+permissive nexol_t;
+
+type nexol_initrc_exec_t;
+init_script_file(nexol_initrc_exec_t)
+
+type nexol_conf_t;
+files_type(nexol_conf_t)
+
+type nexol_var_lib_t;
+files_type(nexol_var_lib_t)
+
+type nexol_var_run_t;
+files_type(nexol_var_run_t)
+
+type nexol_port_t;
+corenet_port(nexol_port_t)
+
+########################################
+#
+# nexol local policy
+#
+allow nexol_t self:process { fork };
+
+allow nexol_t self:fifo_file rw_fifo_file_perms;
+allow nexol_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(nexol_t, nexol_conf_t, nexol_conf_t)
+manage_files_pattern(nexol_t, nexol_conf_t, nexol_conf_t)
+
+manage_dirs_pattern(nexol_t, nexol_var_lib_t, nexol_var_lib_t)
+manage_files_pattern(nexol_t, nexol_var_lib_t, nexol_var_lib_t)
+files_var_lib_filetrans(nexol_t, nexol_var_lib_t, { dir file })
+
+manage_dirs_pattern(nexol_t, nexol_var_run_t, nexol_var_run_t)
+manage_files_pattern(nexol_t, nexol_var_run_t, nexol_var_run_t)
+
+sysnet_dns_name_resolve(nexol_t)
+corenet_all_recvfrom_unlabeled(nexol_t)
+
+allow nexol_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(nexol_t)
+corenet_tcp_sendrecv_generic_node(nexol_t)
+corenet_tcp_sendrecv_all_ports(nexol_t)
+corenet_tcp_bind_generic_node(nexol_t)
+
+gen_require(`
+    type nexol_port_t;
+')
+allow nexol_t nexol_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type nexol_port_t;
+')
+allow nexol_t nexol_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(nexol_t)
+
+files_read_etc_files(nexol_t)
+
+miscfiles_read_localization(nexol_t)
+
+sysnet_dns_name_resolve(nexol_t)
+
+allow nexol_t nexol_exec_t:file execute_no_trans;
+allow nexol_t self:process setsched;
+corecmd_exec_ls(nexol_t)
+corenet_tcp_connect_http_port(nexol_t)
+dev_read_urand(nexol_t)
+fs_getattr_xattr_fs(nexol_t)
+kernel_read_system_state(nexol_t)
